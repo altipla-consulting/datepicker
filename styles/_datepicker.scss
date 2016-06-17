@@ -1,0 +1,196 @@
+
+.goog-date-picker {
+  font-size: 14px;
+  color: #333;
+  z-index: 2000;
+  font-weight: 300;
+  float: left;
+  cursor: default;
+  user-select: none;
+  position: fixed;
+  background: rgba(black, .5);
+  outline: none;
+
+  @media (max-width: $screen-xs-max) {
+    left: 0 !important;
+    right: 0;
+  }
+
+  @media (min-width: $screen-sm) {
+    padding: 8px 0;
+    background: white;
+    position: absolute;
+    border: 1px solid #bbb;
+    box-shadow: 0 2px 6px 1px rgba(0, 0, 0, .3);
+  }
+
+  // iPhones can't have fixed elements while the virtual keyboard is opened.
+  // Use absolute position below the element and without backdrop.
+  &.iphone {
+    position: absolute;
+    padding: 8px 0;
+    background: white;
+    border: 1px solid #bbb;
+    box-shadow: 0 2px 6px 1px rgba(0, 0, 0, .3);
+
+    table {
+      position: static;
+    }
+  }
+
+  &.backdrop {
+    @media (max-width: $screen-xs-max) {
+      bottom: 0;
+      top: 0 !important;
+    }
+  }
+
+  th {
+    font-size: .9em;
+    text-align: center;
+  }
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+
+    div {
+      float: left;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    background-color: white;
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      position: absolute;
+      bottom: 50px;
+    }
+  }
+
+  tbody {
+    outline: 0;
+
+    @media (max-width: $screen-xs-max) {
+      border-bottom: 20px solid white;
+    }
+  }
+
+  button {
+    margin: 1px 0;
+    border: none;
+    color: black;
+    font-weight: bold;
+    background: transparent;
+  }
+
+  thead td {
+    @media (max-width: $screen-xs-max) {
+      padding-top: 36px;
+    }
+  }
+}
+
+.goog-date-picker-date {
+  cursor: pointer;
+  padding: 7px 13px;
+
+  @media (min-width: $screen-sm) {
+    padding: 7px 23px;
+  }
+
+  &:hover {
+    background-color: #b1dcfb;
+    color: black;
+  }
+}
+
+.goog-date-picker-wday {
+  padding: 7px 3px;
+  font-weight: normal;
+}
+
+.goog-date-picker-btn {
+  cursor: pointer;
+  padding: 6px 18px;
+  color: black;
+  width: 100%;
+
+  &:hover {
+    background-color: #b1dcfb;
+  }
+}
+
+.goog-date-picker-monthyear {
+  white-space: nowrap;
+}
+
+.goog-date-picker-selected {
+  background-color: #b1dcfb;
+  border: 1px solid #0089ec;
+}
+
+.goog-date-picker-menu {
+  position: absolute;
+  background: threedface;
+  border: 1px solid gray;
+  z-index: 4;
+  outline: none;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      cursor: default;
+    }
+  }
+}
+
+.goog-date-picker-week {
+  padding: 1px 3px;
+  border: none;
+  border-color: #a2bbdd;
+  border-style: solid;
+  border-right-width: 1px;
+}
+
+.goog-date-picker-head td {
+  text-align: center;
+}
+
+td.goog-date-picker-today-cont {
+  text-align: center;
+}
+
+td.goog-date-picker-none-cont {
+  text-align: center;
+}
+
+.goog-date-picker-month {
+  min-width: 11ex;
+  white-space: nowrap;
+}
+
+.goog-date-picker-year {
+  min-width: 6ex;
+  white-space: nowrap;
+}
+
+.goog-date-picker-other-month {
+  color: #bbb;
+}
+
+.goog-date-picker-unavailable-date {
+  color: #aaa !important;
+  background-color: #f5f5f5 !important;
+  cursor: default !important;
+}
+
+.goog-date-picker-foot {
+  display: none;
+}
