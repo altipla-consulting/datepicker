@@ -26,8 +26,8 @@ altipla.date.MAXIMUM_DATE = goog.date.DateRange.MAXIMUM_DATE;
 
 
 /**
- * Builds a today date object in the Europe/Madrid timezone.
- * @return {!goog.date.Date} Date object.
+ * Builds a date object in the Europe/Madrid timezone with a value of today.
+ * @return {!Date} Date object.
  * @export
  */
 altipla.date.todayMadrid = function() {
@@ -37,8 +37,7 @@ altipla.date.todayMadrid = function() {
   today.add(new Interval(Interval.MINUTES, today.getTimezoneOffset()));
   today.add(new Interval(Interval.MINUTES, -timezone.getOffset(today)));
 
-  return new goog.date.Date(today.getFullYear(), today.getMonth(),
-      today.getDate());
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
 };
 
 
