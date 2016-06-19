@@ -9,6 +9,7 @@ goog.require('goog.date.Date');
 goog.require('goog.date.DateRange');
 goog.require('goog.date.DateTime');
 goog.require('goog.date.Interval');
+goog.require('goog.i18n.DateTimeFormat');
 goog.require('goog.i18n.TimeZone');
 
 
@@ -52,6 +53,19 @@ altipla.date.buildRange = function(start, end) {
   end = new goog.date.Date(end);
   
   return new goog.date.DateRange(start, end);
+};
+
+
+/**
+ * Format a date.
+ * @param {Date} date Date to format.
+ * @param {string} format Format to use.
+ * @return {string} Formatted date.
+ * @export
+ */
+altipla.date.format = function(date, format) {
+  var datefmt = new goog.i18n.DateTimeFormat(format);
+  return datefmt.format(date);
 };
 
 
