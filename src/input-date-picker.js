@@ -2,6 +2,7 @@
 
 goog.provide('altipla.InputDatePicker');
 
+goog.require('altipla.date.MAXIMUM_DATE');
 goog.require('goog.dom');
 goog.require('goog.dom.classlist');
 goog.require('goog.events');
@@ -47,6 +48,13 @@ altipla.InputDatePicker = function(input) {
   this.picker_ = new goog.ui.InputDatePicker(formatter, parser);
   this.picker_.decorate(this.input_);
 
+  /**
+   * Last date picked.
+   * @type {string}
+   * @private
+   */
+  this.last_ = '';
+
   // Style iPhone date pickers without fixed elements; they break when the
   // keyboard is opened.
   var element = this.picker_.getDatePicker().getElement();
@@ -81,22 +89,62 @@ _.INPUT_FORMAT_ = 'dd MMMM yyyy';
 
 /**
  * Add a new change listener.
- * @param {function(altipla.InputDatePicker)} listener Listener to call
+ * @param {function()} listener Listener to call
  * when the value changes.
  * @export
  */
 _.prototype.addChangeListener = function(listener) {
   goog.events.listen(this.picker_.getDatePicker(),
-      goog.ui.DatePicker.Events.CHANGE, goog.bind(listener, this));
+      goog.ui.DatePicker.Events.CHANGE,
+      goog.bind(this.callListener_, this, listener));
 };
 
 
 /**
- * @return {string} Serialized date.
+ * Called when the date selection changes. It will call the listener if it is
+ * not an open event and the date is present correctly.
+ * @param {function()} listener Listener to call.
+ * @private
+ */
+_.prototype.callListener_ = function(listener) {
+  if (!this.getValue() || this.getIsoValue() === this.last_) {
+    return;
+  }
+  this.last_ = this.getIsoValue();
+
+  listener();
+};
+
+
+/**
+ * @return {string} Serialized date in ISO 8601 format (YYYY-MM-DDD).
+ * @export
+ */
+_.prototype.getIsoValue = function() {
+  return this.picker_.getDatePicker().getDate().toIsoString(true);
+};
+
+
+/**
+ * @return {Date} Selected value.
  * @export
  */
 _.prototype.getValue = function() {
-  return this.picker_.getDatePicker().getDate().toIsoString(true);
+  if (!this.picker_.getDatePicker().getDate()) {
+    return null
+  }
+
+  return new Date(this.picker_.getDatePicker().getDate().getTime());
+};
+
+
+/**
+ * Set the value of the picker.
+ * @param {Date} value Selected value.
+ * @export
+ */
+_.prototype.setValue = function(value) {
+  this.picker_.getDatePicker().setDate(new goog.date.Date(value));
 };
 
 
@@ -131,6 +179,16 @@ _.prototype.close_ = function(event) {
 _.prototype.focusInput_ = function() {
   this.input_.focus();
   this.show_();
+};
+
+
+/**
+ * Limits the selectable range.
+ * @param {goog.date.DateRange} range New selectable range.
+ * @export
+ */
+_.prototype.setRange = function(range) {
+  this.picker_.getDatePicker().setUserSelectableDateRange(range);
 };
 
 
