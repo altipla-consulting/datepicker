@@ -5,7 +5,7 @@ set -eu
 rm -rf dist
 mkdir dist
 
-declare -a langs=("es" "en" "fr" "it" "de" "ru" "pt" "ca")
+declare -a langs=("es" "en" "fr" "it" "de" "ru" "pt" "ca" "ja")
 
 for lang in "${langs[@]}"
 do
