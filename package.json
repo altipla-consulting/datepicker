@@ -1,0 +1,16 @@
+{
+  "name": "datepicker",
+  "version": "1.0.0",
+  "description": "Datepicker para reservas.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altipla-consulting/datepicker.git"
+  },
+  "author": "Altipla Consulting",
+  "homepage": "https://github.com/altipla-consulting/datepicker",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
